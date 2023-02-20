@@ -35,10 +35,10 @@ public class Message {
             String byteString = "";
             
             for(int j = i; j < (i+8); j++) {
-                byteString = bits.get(j).toString() + byteString;
+                byteString = byteString + bits.get(j).toString();
             }
             int charInt = Integer.valueOf(byteString, 2);
-            tempString += (char)charInt;
+            tempString = (char)charInt + tempString;
         }        
         
         return tempString;
@@ -60,7 +60,20 @@ public class Message {
             }
         }
         
+        //Adding null terminator
+        for(int i = 0; i < 8; i++) {
+            bitArray.add(0);
+        }
+        
         return bitArray;
+    }
+    
+    public ArrayList<Integer> getBits() {
+        return this.bits;
+    }
+    
+    public String getMessage() {
+        return this.message;
     }
     
     public String toString() {
@@ -70,15 +83,15 @@ public class Message {
 
     //Main Method
     public static void main(String[] args) {
-//        ArrayList<Integer> ints = new ArrayList<>();
-//        ints.add(1);
-//        ints.add(0);
-//        ints.add(1);
-//        ints.add(0);
-//        ints.add(1);
-//        ints.add(0);
-//        ints.add(1);
-//        ints.add(0);
+        ArrayList<Integer> ints = new ArrayList<>();
+        ints.add(0);
+        ints.add(1);
+        ints.add(1);
+        ints.add(0);
+        ints.add(0);
+        ints.add(0);
+        ints.add(0);
+        ints.add(1);
 //        
 //        ints.add(1);
 //        ints.add(0);
@@ -88,10 +101,10 @@ public class Message {
 //        ints.add(0);
 //        ints.add(1);
 //        ints.add(1);
-        String tempString = "a";
-        Message msg = new Message(tempString);
+//        String tempString = "a";
+        Message msg = new Message(ints);
         
-        System.out.println("Hello World!");
+        System.out.println(msg.getMessage());
     }
 
     
